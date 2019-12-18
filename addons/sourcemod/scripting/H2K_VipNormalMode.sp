@@ -33,7 +33,7 @@
 ~ Version "1.7" >> Fix error  [SM] Exception reported: Client 1 is not connected :).
 ~ Version "1.8" >> Restored the freevip from hr to hr, and some major fixes in the code.
 ~ Version "1.9" >> Implemented the unlimited ammo for vip (Sincronic idea)
-~ Version "2.0" >> Fixed the grenades duplicate on round start, and rebuild some functions :).
+~ Version"2.0" >> Fixed the grenades duplicate on round start, and rebuild some functions.
 
 TODO:
 
@@ -186,7 +186,7 @@ public void OnPluginStart()
 	g_CvarIncGranat = CreateConVar("vip_inc", "0", "Should the VIP player get the fire grenade (CT) for the start of a round?");
 	g_CvarMolotovGranat = CreateConVar("vip_molotov", "0", "Should the VIP player get the fire grenade (TT) for the start of a round?");
 	g_CvarTaGranat = CreateConVar("vip_tactic", "0", "Should the VIP player get the ta-grenade for the start of a round?");
-	g_CvarTagTabela = CreateConVar("vip_tag", "0", "Should the table have the tag for the VIP player?");
+	g_CvarTagTabela = CreateConVar("vip_tag", "1", "Should the table have the tag for the VIP player?");
 	g_CvarVipTagTabela = CreateConVar("sm_clantag", "[VIP]", "What kind of the tag should the VIP player have in the table");
 	g_CvarDoubleJump = CreateConVar("double_jump", "1", "Is the VIP player supposed to have a double jump?");
 	g_CvarPistolMenu = CreateConVar("vip_menu_broni", "1", "Is it necessary to have a weapon menu for the VIP player?");
