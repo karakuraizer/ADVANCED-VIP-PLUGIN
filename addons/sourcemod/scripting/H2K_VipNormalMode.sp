@@ -35,15 +35,6 @@
 ~ Version "1.9" >> Implemented the unlimited ammo for vip (Sincronic idea)
 ~ Version"2.0" >> Fixed the grenades duplicate on round start, and rebuild some functions.
 
-TODO:
-
-~ idk
-
-==============================================
-
-//Credits only for her no one else :)
-http://images6.fanpop.com/image/photos/36600000/Rias-Gremory-image-rias-gremory-36601369-1920-1080.png
-
 */
 
 /* << Includy >> */
@@ -53,12 +44,12 @@ http://images6.fanpop.com/image/photos/36600000/Rias-Gremory-image-rias-gremory-
 #include <sdkhooks>
 
 /* << Define >> */
-#define PLUGIN_NAME "[CSGO] Advanced VIP System for CSGO Servers"
-#define PLUGIN_DESCRIPTION "[CSGO] Avanced VIP System for CSGO Servers"
+#define PLUGIN_NAME "[CSGO] Advanced PREMIUM System for CSGO Servers"
+#define PLUGIN_DESCRIPTION "[CSGO] Avanced PREMIUM System for CSGO Servers"
 #define PLUGIN_AUTHOR "Mesharsky"
 #define PLUGIN_VERSION "2.0"
 
-#define VIP_PREFIX " ★ \x02[VIP]\x04"
+#define VIP_PREFIX " ★ \x02[PREMIUM]\x04"
 
 /* << Pragma >> */
 #pragma newdecls required
@@ -242,7 +233,7 @@ public Action Hud_Command(int client, int args)
 	
 	if (!IsPlayerVip(client))
 	{
-		PrintToChat(client, "Only VIP can use this command.");
+		PrintToChat(client, "Only Premium can use this command.");
 		return Plugin_Handled;
 	}
 	
@@ -260,7 +251,7 @@ public Action Hud_Command(int client, int args)
 		if (IsClientInGame(i) && !IsFakeClient(i))
 		{
 			SetHudTextParams(0.35, 0.225, 10.0, 0, 255, 0, 1, 0, 2.5, 2.0); //You can edit it 4fun idgaf
-			ShowHudText(i, 5, "VIP: %N say:\n%s", client, text);
+			ShowHudText(i, 5, "PREMIUM: %N say:\n%s", client, text);
 		}
 	}
 	
@@ -283,7 +274,7 @@ public Action GunsMenu(int client) // I will do configuration via KeyValues to i
 		if (IsPlayerVip(client))
 		{
 			Menu menu = new Menu(MenuHandler1);
-			menu.SetTitle("VIP : Choose your Gun");
+			menu.SetTitle("PREMIUM : Choose your Gun");
 			menu.AddItem("weapon_ak47", "AK-47");
 			menu.AddItem("weapon_m4a1", "M4A4");
 			menu.AddItem("weapon_m4a1_silencer", "M4A1-S");
@@ -292,7 +283,7 @@ public Action GunsMenu(int client) // I will do configuration via KeyValues to i
 			menu.AddItem("weapon_xm1014", "XM1014");
 			menu.AddItem("weapon_famas", "FAMAS");
 			menu.ExitButton = true;
-			menu.Display(client, 15);
+			menu.Display(client, 0);
 		}
 	}
 }
@@ -323,7 +314,7 @@ public Action PistolMenu(int client)
 		if (IsPlayerVip(client))
 		{
 			Menu menusec = new Menu(MenuHandler2);
-			menusec.SetTitle("VIP : Choose Pistol");
+			menusec.SetTitle("PREMIUM : Choose Pistol");
 			menusec.AddItem("weapon_deagle", "Deagle");
 			menusec.AddItem("weapon_revolver", "R8 Revolver");
 			menusec.AddItem("weapon_fiveseven", "Five-Seven");
@@ -332,7 +323,7 @@ public Action PistolMenu(int client)
 			menusec.AddItem("weapon_elite", "Dual Elites");
 			menusec.AddItem("weapon_p250", "p250");
 			menusec.ExitButton = true;
-			menusec.Display(client, 15);
+			menusec.Display(client, 0);
 		}
 	}
 }
@@ -494,7 +485,7 @@ public Action Event_PlayerDeath(Event hEvent, const char[] chName, bool bDontBro
 				SetEntProp(attacker, Prop_Send, "m_iAccount", g_CvarVipKillKnifeMoney.IntValue + PieniadzeGracza);
 				
 				if (g_CvarChatMessages.BoolValue)
-					PrintToChat(attacker, "%s As a VIP player you received %i$ for Knife kill.", VIP_PREFIX, g_CvarVipKillKnifeMoney.IntValue);
+					PrintToChat(attacker, "%s As a PREMIUM player you received %i$ for Knife kill.", VIP_PREFIX, g_CvarVipKillKnifeMoney.IntValue);
 			}
 		}
 	}
@@ -508,7 +499,7 @@ public Action Event_BombPlanted(Event hEvent, const char[] chName, bool bDontBro
 	if (IsPlayerVip(client))
 	{
 		if (g_CvarChatMessages.BoolValue)
-			PrintToChat(client, "%s As a VIP player you received %i$ for planting a Bomb.", VIP_PREFIX, g_CvarVipBombPlantedMoney.IntValue);
+			PrintToChat(client, "%s As a PREMIUM player you received %i$ for planting a Bomb.", VIP_PREFIX, g_CvarVipBombPlantedMoney.IntValue);
 		
 		SetEntProp(client, Prop_Send, "m_iAccount", g_CvarVipBombPlantedMoney.IntValue + PieniadzeGracza);
 	}
@@ -522,7 +513,7 @@ public Action Event_BombDefused(Event hEvent, const char[] chName, bool bDontBro
 	if (IsPlayerVip(client))
 	{
 		if (g_CvarChatMessages.BoolValue)
-			PrintToChat(client, "%s As a VIP player you received %i$ for defusing a Bomb.", VIP_PREFIX, g_CvarVipBombDefusedMoney.IntValue);
+			PrintToChat(client, "%s As a PREMIUM player you received %i$ for defusing a Bomb.", VIP_PREFIX, g_CvarVipBombDefusedMoney.IntValue);
 		
 		SetEntProp(client, Prop_Send, "m_iAccount", g_CvarVipBombDefusedMoney.IntValue + PieniadzeGracza);
 	}
@@ -619,7 +610,7 @@ public Action ShowOnlineVips(int client, int args)
 	
 	Menu menu = new Menu(Menu_Handler);
 	
-	menu.SetTitle("Vip players that are currently on the server");
+	menu.SetTitle("PREMIUM players that are currently on the server");
 	
 	for (int i = 1; i < MaxClients; i++)
 	{
@@ -634,7 +625,7 @@ public Action ShowOnlineVips(int client, int args)
 				IntToString(i, cid, sizeof cid);
 				GetClientName(i, name, sizeof name);
 				
-				Format(format, sizeof format, "[VIP] » %s", name);
+				Format(format, sizeof format, "[PREMIUM] » %s", name);
 				menu.AddItem(cid, format, ITEMDRAW_DISABLED);
 				iCount++;
 			}
@@ -643,7 +634,7 @@ public Action ShowOnlineVips(int client, int args)
 	
 	if (iCount == 0)
 	{
-		menu.AddItem("ITEMDRAW_DISABLED", "Oops, it looks like there are no online players having VIP service.");
+		menu.AddItem("ITEMDRAW_DISABLED", "Oops, it looks like there are no online players having PREMIUM service.");
 	}
 	
 	menu.ExitButton = true;
